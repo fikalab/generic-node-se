@@ -23,10 +23,10 @@
 
 /*
  * Function:      MX25R16_Init
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function is for initializing the device and controller.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function is for initializing the device and controller.
  */
 int MX25R16_Init(MxChip *Mxic)
 {
@@ -63,12 +63,12 @@ int MX25R16_Init(MxChip *Mxic)
 #ifdef    BLOCK0_BASIC
 /*
  * Function:      MX25R16_SetMode
- * Arguments:      Mxic,        pointer to an mxchip structure of nor flash device.
- *                SetMode,     variable in which to store the operation mode to set.
- *                SetAddrMode, variable in which to store the address mode to set.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function is for setting the operation mode and address mode.
+ * @param:        Mxic,        pointer to an mxchip structure of nor flash device.
+ * @param:        SetMode,     variable in which to store the operation mode to set.
+ * @param:        SetAddrMode, variable in which to store the address mode to set.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function is for setting the operation mode and address mode.
  */
 int MX25R16_SetMode(MxChip *Mxic, u32 SetMode,u32 SetAddrMode)
 {
@@ -77,13 +77,13 @@ int MX25R16_SetMode(MxChip *Mxic, u32 SetMode,u32 SetAddrMode)
 
 /*
  * Function:      MX25R16_Read
- * Arguments:      Mxic:      pointer to an mxchip structure of nor flash device.
- *                Addr:      device address to read.
- *                ByteCount: number of bytes to read.
- *                Buf:       pointer to a data buffer where the read data will be stored.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function issues the Read commands to SPI Flash and reads data from the array.
+ * @param:        Mxic:      pointer to an mxchip structure of nor flash device.
+ * @param:        Addr:      device address to read.
+ * @param:        ByteCount: number of bytes to read.
+ * @param:        Buf:       pointer to a data buffer where the read data will be stored.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function issues the Read commands to SPI Flash and reads data from the array.
  *                Data size is specified by ByteCount.
  *                This function invokes MxREAD() when used with Mx25R16 external flash
  */
@@ -101,14 +101,14 @@ int MX25R16_Read(MxChip *Mxic, u32 Addr, u32 ByteCount, u8 *Buf)
 
 /*
  * Function:      MX25R16_Write
- * Arguments:      Mxic:      pointer to an mxchip structure of nor flash device.
- *                Addr:      device address to program.
- *                ByteCount: number of bytes to program.
- *                Buf:       pointer to a data buffer where the program data will be stored.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- *                MXST_TIMEOUT.
- * Description:   This function programs location to the specified data.
+ * @param:        Mxic:      pointer to an mxchip structure of nor flash device.
+ * @param:        Addr:      device address to program.
+ * @param:        ByteCount: number of bytes to program.
+ * @param:        Buf:       pointer to a data buffer where the program data will be stored.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @retval:       MXST_TIMEOUT.
+ * @brief:        This function programs location to the specified data.
  *                This function invokes MxPP() when used with Mx25R16 external flash
  */
 int MX25R16_Write(MxChip *Mxic, u32 Addr, u32 ByteCount, u8 *Buf)
@@ -118,13 +118,13 @@ int MX25R16_Write(MxChip *Mxic, u32 Addr, u32 ByteCount, u8 *Buf)
 
 /*
  * Function:      MX25R16_Erase
- * Arguments:      Mxic:           pointer to an mxchip structure of nor flash device.
- *                Addr:           device address to erase.
- *                EraseSizeCount: number of blocks to erase.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- *                MXST_TIMEOUT.
- * Description:   This function erases the data in the specified Block or Sector.
+ * @param:        Mxic:           pointer to an mxchip structure of nor flash device.
+ * @param:        Addr:           device address to erase.
+ * @param:        EraseSizeCount: number of blocks to erase.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @retval:       MXST_TIMEOUT.
+ * @brief:        This function erases the data in the specified Block or Sector.
  *                Function issues all required commands and polls for completion.
  *                This function invokes MxBE() and erases blocks of 64k-byte.
  */
@@ -138,10 +138,10 @@ int MX25R16_Erase(MxChip *Mxic, u32 Addr, u32 EraseSizeCount)
 #ifdef BLOCK1_SPECIAL_FUNCTION
 /*
  * Function:      MXR2516_Suspend.
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function suspends Sector-Erase, Block-Erase or Page-Program operations and conduct other operations.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function suspends Sector-Erase, Block-Erase or Page-Program operations and conduct other operations.
  */
 int MXR2516_Suspend(MxChip *Mxic)
 {
@@ -150,10 +150,10 @@ int MXR2516_Suspend(MxChip *Mxic)
 
 /*
  * Function:      MXR2516_Resume
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function resumes Sector-Erase, Block-Erase or Page-Program operations.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function resumes Sector-Erase, Block-Erase or Page-Program operations.
  */
 int MXR2516_Resume(MxChip *Mxic)
 {
@@ -162,10 +162,10 @@ int MXR2516_Resume(MxChip *Mxic)
 
 /*
  * Function:      MXR2516_DeepPowerDown
- * Arguments:      Mxic:  pointer to an mxchip structure of nor flash device.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function is for setting the device on the minimizing the power consumption.
+ * @param:        Mxic:  pointer to an mxchip structure of nor flash device.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function is for setting the device on the minimizing the power consumption.
  */
 int MXR2516_DeepPowerDown(MxChip *Mxic)
 {
@@ -174,10 +174,10 @@ int MXR2516_DeepPowerDown(MxChip *Mxic)
 
 /*
  * Function:      MXR2516_RealseDeepPowerDown
- * Arguments:      Mxic:  pointer to an mxchip structure of nor flash device.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function is for putting the device in the Stand-by Power mode.
+ * @param:        Mxic:  pointer to an mxchip structure of nor flash device.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function is for putting the device in the Stand-by Power mode.
  */
 int MXR2516_RealseDeepPowerDown(MxChip *Mxic)
 {
@@ -190,10 +190,10 @@ int MXR2516_RealseDeepPowerDown(MxChip *Mxic)
 #ifdef BLOCK2_SERCURITY_OTP
 /*
  * Function:      MXR2516_EnterOTP
- * Arguments:      Mxic:  pointer to an mxchip structure of nor flash device.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function is for entering the secured OTP mode.
+ * @param:        Mxic:  pointer to an mxchip structure of nor flash device.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function is for entering the secured OTP mode.
  */
 int MXR2516_EnterOTP(MxChip *Mxic)
 {
@@ -202,10 +202,10 @@ int MXR2516_EnterOTP(MxChip *Mxic)
 
 /*
  * Function:      MXR2516_ExitOTP
- * Arguments:      Mxic:  pointer to an mxchip structure of nor flash device.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function is for exiting the secured OTP mode.
+ * @param:        Mxic:  pointer to an mxchip structure of nor flash device.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function is for exiting the secured OTP mode.
  */
 int MXR2516_ExitOTP(MxChip *Mxic)
 {
@@ -214,12 +214,12 @@ int MXR2516_ExitOTP(MxChip *Mxic)
 
 /*
  * Function:      MX25R16_LockFlash
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- *                Addr,  32 bit flash memory address of locked area.
- *                Len,   number of bytes to lock.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function is for writing protection a specified block (or sector) of flash memory.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @param:        Addr,  32 bit flash memory address of locked area.
+ * @param:        Len,   number of bytes to lock.
+ * @retval:       MXST_SUCCESS.
+ * @retval:       MXST_FAILURE.
+ * @brief:        This function is for writing protection a specified block (or sector) of flash memory.
  */
 int MX25R16_LockFlash(MxChip *Mxic, u32 Addr, u64 Len)
 {
@@ -228,12 +228,12 @@ int MX25R16_LockFlash(MxChip *Mxic, u32 Addr, u64 Len)
 
 /*
  * Function:      MX25R16_UnlockFlash
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- *                Addr,  32 bit flash memory address of unlocked area.
- *                Len,   number of bytes to unlock.
- * Return Value:  MXST_SUCCESS.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @param:        Addr,  32 bit flash memory address of unlocked area.
+ * @param:        Len,   number of bytes to unlock.
+ * @retval:       MXST_SUCCESS.
  *                MXST_FAILURE.
- * Description:   This function will cancel the block (or sector)  write protection state.
+ * @brief:        This function will cancel the block (or sector)  write protection state.
  */
 int MX25R16_UnlockFlash(MxChip *Mxic, u32 Addr, u64 Len)
 {
@@ -242,13 +242,13 @@ int MX25R16_UnlockFlash(MxChip *Mxic, u32 Addr, u64 Len)
 
 /*
  * Function:      MX25R16_IsFlashLocked
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- *                Addr,  32 bit flash memory address of checking area.
- *                Len,   number of bytes to check.
- * Return Value:  MXST_FAILURE.
- *                   FLASH_IS_UNLOCKED.
- *                FLASH_IS_LOCKED.
- * Description:   This function is for checking if the block (or sector) is locked.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @param:        Addr,  32 bit flash memory address of checking area.
+ * @param:        Len,   number of bytes to check.
+ * @retval:       MXST_FAILURE.
+ * @retval        FLASH_IS_UNLOCKED.
+ * @retval        FLASH_IS_LOCKED.
+ * @brief:        This function is for checking if the block (or sector) is locked.
  */
 int MX25R16_IsFlashLocked(MxChip *Mxic, u32 Addr, u64 Len)
 {
@@ -257,12 +257,12 @@ int MX25R16_IsFlashLocked(MxChip *Mxic, u32 Addr, u64 Len)
 
 /*
  * Function:      MX25R16_DPBLockFlash
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- *                Addr,  32 bit flash memory address of locked area in dynamic protection mode.
- *                Len,   number of bytes to lock in dynamic protection mode.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function is for writing protection a specified block (or sector) of flash memory in dynamic protection mode.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @param:        Addr,  32 bit flash memory address of locked area in dynamic protection mode.
+ * @param:        Len,   number of bytes to lock in dynamic protection mode.
+ * @retval:       MXST_SUCCESS.
+ * @retval        MXST_FAILURE.
+ * @brief:        This function is for writing protection a specified block (or sector) of flash memory in dynamic protection mode.
  */
 int MX25R16_DPBLockFlash(MxChip *Mxic, u32 Addr, u64 Len)
 {
@@ -271,12 +271,12 @@ int MX25R16_DPBLockFlash(MxChip *Mxic, u32 Addr, u64 Len)
 
 /*
  * Function:      MX25R16_DPBUnlockFlash
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- *                Addr,  32 bit flash memory address of unlocked area in dynamic protection mode.
- *                Len,   number of bytes to unlock in dynamic protection mode.
- * Return Value:  MXST_SUCCESS.
- *                MXST_FAILURE.
- * Description:   This function will cancel the block (or sector)  write protection state in dynamic protection mode.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @param:        Addr,  32 bit flash memory address of unlocked area in dynamic protection mode.
+ * @param:        Len,   number of bytes to unlock in dynamic protection mode.
+ * @retval:       MXST_SUCCESS.
+ * @retval        MXST_FAILURE.
+ * @brief:        This function will cancel the block (or sector)  write protection state in dynamic protection mode.
  */
 int MX25R16_DPBUnlockFlash(MxChip *Mxic, u32 Addr, u64 Len)
 {
@@ -285,13 +285,13 @@ int MX25R16_DPBUnlockFlash(MxChip *Mxic, u32 Addr, u64 Len)
 
 /*
  * Function:      MX25R16_IsFlashDPBLocked
- * Arguments:      Mxic,  pointer to an mxchip structure of nor flash device.
- *                Addr,  32 bit flash memory address of checking area in dynamic protection mode.
- *                Len,   number of bytes to check in dynamic protection mode.
- * Return Value:  MXST_FAILURE.
- *                   FLASH_IS_UNLOCKED.
- *                FLASH_IS_LOCKED.
- * Description:   This function is for checking if the block (or sector) is locked in dynamic protection mode.
+ * @param:        Mxic,  pointer to an mxchip structure of nor flash device.
+ * @param:        Addr,  32 bit flash memory address of checking area in dynamic protection mode.
+ * @param:        Len,   number of bytes to check in dynamic protection mode.
+ * @retval:       MXST_FAILURE.
+ * @retval:       FLASH_IS_UNLOCKED.
+ * @retval:       FLASH_IS_LOCKED.
+ * @brief:        This function is for checking if the block (or sector) is locked in dynamic protection mode.
  */
 int MX25R16_IsFlashDPBLocked(MxChip *Mxic, u32 Addr, u64 Len)
 {

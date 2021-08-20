@@ -30,7 +30,7 @@
  */
 
 /**
- * \file
+ * \file SHTC3.c
  *
  * \brief Sensirion SHTC3 (and compatible) driver implementation
  *
