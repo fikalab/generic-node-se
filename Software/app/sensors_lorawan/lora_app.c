@@ -27,6 +27,9 @@
 #include "lora_info.h"
 #include "sensors.h"
 
+#include "nor_ops.h"
+#include "mx_test.h"
+
 /**
   * @brief LoRa State Machine states
   */
@@ -193,6 +196,18 @@ static void SendTxData(void)
 {
   sensors_t sensor_data;
   UTIL_TIMER_Time_t nextTxIn = 0;
+  
+  GNSE_BSP_LS_Init(LOAD_SWITCH_FLASH);
+  GNSE_BSP_LS_On(LOAD_SWITCH_FLASH);
+  HAL_Delay(LOAD_SWITCH_FLASH_DELAY_MS);
+  MxChip mxic = {0};
+  MxChip *Mxic;
+  MX25R16_Init(&mxic);
+  uint8_t RdData[100] = {0};
+
+  AppGrp * App = &Mxic->AppGrp;
+  App->_Read(Mxic, 0, 10, RdData);
+  APP_PRINTF("\r\n RX: %s \r\n", RdData);
 
   sensors_sample(&sensor_data);
   AppData.Port = SENSORS_PAYLOAD_APP_PORT;
