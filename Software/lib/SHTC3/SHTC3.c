@@ -52,7 +52,7 @@
 #define SHTC3_CMD_MEASURE_LPM 0x609C
 #endif /* USE_SENSIRION_CLOCK_STRETCHING */
 static const uint16_t SHTC3_CMD_DURATION_USEC = 1000;
-static const unsigned SHTC3_WAKEUP_TIME_USEC = 120;
+static const unsigned SHTC3_WAKEUP_TIME_USEC = 240;
 
 static const uint16_t SHTC3_CMD_SLEEP = 0xB098;
 static const uint16_t SHTC3_CMD_WAKEUP = 0x3517;
