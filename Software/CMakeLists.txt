@@ -14,25 +14,25 @@
 #-------------------
 cmake_minimum_required(VERSION 3.16.1)
 
-option(UAIR_HOST_MODE "Enables host mode support, in which the lib targets the host architecture.")
-option(UAIR_UNIT_TESTS "Enables support for unit-tests (assumes UAIR_HOST_MODE)." OFF)
+option(HOSTMODE "Enables host mode support, in which the lib targets the host architecture.")
+option(UNITTESTS "Enables support for unit-tests (assumes HOSTMODE)." OFF)
 
-if (UAIR_HOST_MODE)
-    if (NOT (UAIR_HOST_MODE MATCHES "^(x86_64|i686)$"))
-        message(FATAL_ERROR "[ERRR] Invalid value for UAIR_HOST_MODE (valid values are 'x86_64' or 'i686').")
+if (HOSTMODE)
+    if (NOT (HOSTMODE MATCHES "^(x86_64|i686)$"))
+        message(FATAL_ERROR "[ERRR] Invalid value for HOSTMODE (valid values are 'x86_64' or 'i686').")
     endif()
 endif()
 
-IF (UAIR_UNIT_TESTS AND NOT UAIR_HOST_MODE)
-    message(FATAL_ERROR "[ERRR] To enable unit-tests (UAIR_UNIT_TESTS) you must also enable host mode (UAIR_HOST_MODE).")
+IF (UNITTESTS AND NOT HOSTMODE)
+    message(FATAL_ERROR "[ERRR] To enable unit-tests (UNITTESTS) you must also enable host mode (HOSTMODE).")
 endif()
 
-if (NOT UAIR_HOST_MODE)
+if (NOT HOSTMODE)
     if(NOT CMAKE_TOOLCHAIN_FILE)
         message(FATAL_ERROR "[ERRR] CMAKE_TOOLCHAIN_FILE not specified")
     endif()
 else()
-    message(STATUS "Compiling for hosts architecture: ${UAIR_HOST_MODE}")
+    message(STATUS "Compiling for hosts architecture: ${HOSTMODE}")
 endif()
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -56,18 +56,18 @@ project(${TARGET_APP})
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-if (NOT UAIR_HOST_MODE)
+if (NOT HOSTMODE)
     set(LINKER_SCRIPT "mais/uair/Software/target/stm32wl55xx_uair_flash.ld")
     set(OBJECT_GEN_FLAGS "-Werror -Wall -ffunction-sections -fdata-sections -fno-builtin -fomit-frame-pointer")
 else()
     set(LINKER_SCRIPT "")
     set(MCU_DIR "mais/uair/hostmode/target")
-    set(OBJECT_GEN_FLAGS "-DUAIR_HOST_MODE -fPIE -DPIE -Werror -Wall -ffunction-sections -fdata-sections -fno-builtin -fomit-frame-pointer")
+    set(OBJECT_GEN_FLAGS "-DHOSTMODE -fPIE -DPIE -Werror -Wall -ffunction-sections -fdata-sections -fno-builtin -fomit-frame-pointer")
 
-    if (UAIR_HOST_MODE STREQUAL "x86_64")
+    if (HOSTMODE STREQUAL "x86_64")
         set(HOST_ARCH "x86_64")
         string(APPEND OBJECT_GEN_FLAGS " -m64")
-    elseif (UAIR_HOST_MODE STREQUAL "i686")
+    elseif (HOSTMODE STREQUAL "i686")
         set(HOST_ARCH "i686")
         string(APPEND OBJECT_GEN_FLAGS " -m32")
     endif()
@@ -91,7 +91,7 @@ endif()
 #-------------------
 # MCU Setup
 #-------------------
-if (NOT UAIR_HOST_MODE)
+if (NOT HOSTMODE)
 
     set(MCU STM32WL55xx)
     set(MCU_DIR target)
@@ -223,7 +223,7 @@ endif()
 #-------------------
 # General Flags for cross
 #-------------------
-if (NOT UAIR_HOST_MODE)
+if (NOT HOSTMODE)
     string(APPEND OBJECT_GEN_FLAGS " \
         -mcpu=${MCU_SPEC} \
         -mthumb \
@@ -258,7 +258,7 @@ string(APPEND CMAKE_EXE_LINKER_FLAGS " \
 ${OBJECT_GEN_FLAGS} \
 ")
 
-if (NOT UAIR_HOST_MODE)
+if (NOT HOSTMODE)
 
     find_file(LINKER_SCRIPT_PATH
         NAMES "${LINKER_SCRIPT}"
@@ -287,12 +287,12 @@ endif()
 if("${SEMIHOSTING}" STREQUAL "1")
     string(APPEND CMAKE_EXE_LINKER_FLAGS "--specs=rdimon.specs -lc -lrdimon ")
 else()
-    if (NOT UAIR_HOST_MODE)
+    if (NOT HOSTMODE)
         string(APPEND CMAKE_EXE_LINKER_FLAGS "--specs=nosys.specs ")
     endif()
 endif()
 
-if (UAIR_HOST_MODE)
+if (HOSTMODE)
     set(EXTRA_LIBRARIES pthread intrhandler)
 endif()
 
@@ -308,7 +308,7 @@ if(TARGET_APP IN_LIST APP_LIST)
     SEMIHOSTING=${SEMIHOSTING}
     -DGNSE_APP_NAME="${TARGET_APP}"
     )
-    if (NOT UAIR_HOST_MODE)
+    if (NOT HOSTMODE)
     # Create output in hex and binary format
     create_hex_output(${PROJECT_NAME} ${APP_BUILD_DIR})
     create_bin_output(${PROJECT_NAME} ${APP_BUILD_DIR})
