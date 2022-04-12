@@ -21,6 +21,8 @@
 #include "LmhpFirmwareManagement.h"
 #include "GNSE_tracer.h"
 
+extern void BSP_SystemResetRequest();
+
 /* Private typedef -----------------------------------------------------------*/
 /*!
  * Package current context
@@ -224,7 +226,7 @@ static void LmhpFirmwareManagementOnMcpsIndication(McpsIndication_t *mcpsIndicat
 
         if (rebootTimeReq == 0)
         {
-          NVIC_SystemReset();
+          BSP_SystemResetRequest();
         }
         else if (rebootTimeReq == 0xFFFFFFFF)
         {
@@ -263,7 +265,7 @@ static void LmhpFirmwareManagementOnMcpsIndication(McpsIndication_t *mcpsIndicat
 
         if (rebootCountdown == 0)
         {
-          NVIC_SystemReset();
+          BSP_SystemResetRequest();
         }
         else if (rebootCountdown == 0xFFFFFF)
         {
@@ -347,5 +349,5 @@ static void LmhpFirmwareManagementOnMcpsIndication(McpsIndication_t *mcpsIndicat
 
 static void OnRebootTimer(void *context)
 {
-  NVIC_SystemReset();
+  BSP_SystemResetRequest();
 }
