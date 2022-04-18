@@ -15,7 +15,7 @@
 cmake_minimum_required(VERSION 3.16.1)
 
 option(HOSTMODE "Enables host mode support, in which the lib targets the host architecture.")
-option(UNITTESTS "Enables support for unit-tests (assumes HOSTMODE)." OFF)
+option(UNITTESTS "Enables support for unit-tests (assumes HOSTMODE).")
 
 if (HOSTMODE)
     if (NOT (HOSTMODE MATCHES "^(x86_64|i686)$"))
@@ -70,6 +70,9 @@ else()
     elseif (HOSTMODE STREQUAL "i686")
         set(HOST_ARCH "i686")
         string(APPEND OBJECT_GEN_FLAGS " -m32")
+    endif()
+    if (UNITTESTS)
+        string(APPEND OBJECT_GEN_FLAGS " -DUNITTESTS")
     endif()
 endif()
 
